@@ -1,0 +1,26 @@
+@startuml
+
+' Define actors
+actor "Data Analyst" as analyst
+actor "SQL Database" as database
+
+' Define system boundary (rectangle) for the system
+rectangle "Population Data Access System" {
+    usecase "Query Population Data" as UC1
+    usecase "Filter Data by Criteria" as UC2
+    usecase "Generate Reports" as UC3
+    usecase "Export Data" as UC4
+    usecase "Visualize Population Data" as UC5
+}
+
+' Data Analyst interacting with use cases
+analyst --> UC1 : "Queries data"
+analyst --> UC2 : "Filters data"
+analyst --> UC3 : "Generates report"
+analyst --> UC4 : "Exports data"
+analyst --> UC5 : "Visualizes data"
+
+' SQL Database interacting with Query Population Data
+database --> UC1 : "Retrieves data"
+
+@enduml
