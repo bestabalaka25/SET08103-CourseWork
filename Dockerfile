@@ -1,4 +1,6 @@
 FROM openjdk:latest
-COPY ./target/SET08103COURSEWORK-1.0-SNAPSHOT-jar-with-dependencies.jar /tmp
+COPY ./target/seMethods.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "SET08103COURSEWORK-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "seMethods.jar", "db:3306", "10000"]
+
+#I have updated the dockerfile to reflect the set JAR name and location of database
