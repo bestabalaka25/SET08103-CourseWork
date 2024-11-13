@@ -75,5 +75,73 @@ class MyTest1
     {
         assertEquals(5, 5);
     }
+
+    @Test
+    void unitTest2() {
+        assertEquals(5, 4);
+    }
+
+    void throwsException() throws NullPointerException {
+        throw new NullPointerException();
+    }
+
+    @Test
+    void unitTest10() {
+        assertThrows(NullPointerException.class, this::throwsException);
+    }
+
+    @Test
+    void unitTest9() {
+        assertNotNull("Hello");
+    }
+
+    @Test
+    void unitTest8() {
+        assertNull(null);
+    }
+
+    @Test
+    void unitTest7() {
+        assertFalse(5 == 4);
+    }
+
+    @Test
+    void unitTest6() {
+        assertTrue(5 == 5);
+    }
+
+    @Test
+    void unitTest5() {
+        int[] a = {1, 2, 3};
+        int[] b = {1, 2, 3};
+        assertArrayEquals(a, b);
+    }
+
+    @Test
+    void unitTest4() {
+        assertEquals(5.0, 5.01, 0.02);
+    }
+
+    @Test
+    void unitTest3() {
+        assertEquals(5, 5, "Messages are equal");
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
