@@ -68,3 +68,12 @@ class MyTest
     }
 }
 
+class MyTest1
+{
+    @Test
+    void unitTest()
+    {
+        assertEquals(5, 5);
+    }
+}
+
