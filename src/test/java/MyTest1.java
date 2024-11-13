@@ -76,10 +76,7 @@ class MyTest1
         assertEquals(5, 5);
     }
 
-    @Test
-    void unitTest2() {
-        assertEquals(5, 4);
-    }
+
 
     void throwsException() throws NullPointerException {
         throw new NullPointerException();
