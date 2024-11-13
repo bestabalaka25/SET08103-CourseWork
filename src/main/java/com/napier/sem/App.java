@@ -6,12 +6,8 @@ public class App
 {
     public static void main(String[] args) {
         App a = new App();
-        if (args.length < 1) {
-            a.connect("localhost:33060", 10000);
-        } else {
-            a.connect(args[0], Integer.parseInt(args[1]));
-        }
 
+        a.connect();
 
         City ct = a.getCity(1);
         a.displayCity(ct);
@@ -19,11 +15,9 @@ public class App
         a.disconnect();
     }
     /**
-     * 11/11/24 modified Main to default to localhost
      * Connect to the MySQL database.
-     * 11/11/24 updated connect method to add location and delay parameters
      */
-    public void connect(String location, int delay)
+    public void connect()
     {
         try
         {
@@ -37,15 +31,13 @@ public class App
         }
 
         int retries = 10;
-        boolean shouldWait = false;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
             try
             {
-                if (shouldWait) {
-                    Thread.sleep(delay);
-                }
+                // Wait a bit for db to start
+                Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
@@ -55,7 +47,6 @@ public class App
             {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
-                shouldWait = true;
             }
             catch (InterruptedException ie)
             {
