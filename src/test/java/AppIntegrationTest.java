@@ -1,5 +1,4 @@
-import com.napier.sem.App;
-import com.napier.sem.City;
+import com.napier.sem.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -24,6 +23,8 @@ public class AppIntegrationTest
         assertEquals(ct.District, "Kabol");
         assertEquals(ct.Population, 1780000);
     }
+
+
 }
 /** 13/11/24 I have created a java file for app integration testing
  * I have added a test to compare actual values against expected values, if they match the test will pass.
