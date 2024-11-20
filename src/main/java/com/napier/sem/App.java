@@ -118,7 +118,7 @@ public class App {
             Statement stmt = con.createStatement();
             String strSelect =
                     "SELECT Code, Name, Continent, Region, Population "
-                            + "FROM city "
+                            + "FROM country "
                             + "WHERE Code =" + Code;
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -147,6 +147,41 @@ public class App {
                             + cn.Continent + " "
                             + cn.Region + " "
                             + cn.Population + "\n");
+        }
+    }
+
+    public CountryLanguage getCountryLanguage(String CountryCode) {
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT CountryCode, Language, IsOfficial, Percentage"
+                            + "FROM countrylanguage "
+                            + "WHERE CountryCode =" + CountryCode;
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset.next()) {
+                CountryLanguage cl = new CountryLanguage();
+                cl.CountryCode = rset.getString("CountryCode");
+                cl.Language = rset.getString("Language");
+                cl. IsOfficial = rset.getString("IsOfficial");
+                cl.Percentage = rset.getFloat("Percentage");
+                return cl;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country language");
+            return null;
+        }
+    }
+
+    public void displayCountryLanguage(CountryLanguage cl) {
+        if (cl != null) {
+            System.out.println(
+                    cl.CountryCode + " "
+                            + cl.Language + " "
+                            + cl.IsOfficial + " "
+                            + cl.Percentage + " ");
         }
     }
 }
