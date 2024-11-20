@@ -110,4 +110,43 @@ public class App {
                             + ct.Population + "\n");
         }
     }
+
+
+
+    public Country getCountry(String Code) {
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population "
+                            + "FROM city "
+                            + "WHERE Code =" + Code;
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset.next()) {
+                Country cn = new Country();
+                cn.Code = rset.getString("Code");
+                cn.Name = rset.getString("Name");
+                cn.Continent = rset.getString("Continent");
+                cn.Region = rset.getString("Region");
+                cn.Population = rset.getInt("Population");
+                return cn;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country");
+            return null;
+        }
+    }
+
+    public void displayCountry(Country cn) {
+        if (cn != null) {
+            System.out.println(
+                    cn.Code + " "
+                            + cn.Name + " "
+                            + cn.Continent + " "
+                            + cn.Region + " "
+                            + cn.Population + "\n");
+        }
+    }
 }
