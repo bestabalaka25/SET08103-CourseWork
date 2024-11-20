@@ -36,6 +36,9 @@ jobs:
           docker build -t database ./db
           docker run --name City -dp 33060:3306 database
           mvn -Dtest=com.napier.sem.AppIntegrationTest test
+          docker stop City
+          docker rm City
+          docker image rm database
 
 
   build:
