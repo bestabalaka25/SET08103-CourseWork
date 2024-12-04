@@ -2,6 +2,45 @@ name: SET08103 Workflow
 on: push
 
 jobs:
+  UnitTests:
+    name: Unit Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Unit Tests
+        run: mvn -Dtest=com.napier.sem.MyTest test
+
+  IntegrationTests:
+    name: Integration Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Integration Tests
+        run: |
+          docker build -t database ./db
+          docker run --name City -dp 33060:3306 database
+          mvn -Dtest=com.napier.sem.AppIntegrationTest test
+          docker stop City
+          docker rm City
+          docker image rm database
+
+
   build:
     name: Set08103 CourseWork Action
     runs-on: ubuntu-20.04
@@ -16,6 +55,6 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn package
+        run: mvn package -DskipTests
       - name: Run docker compose
         run: docker compose up --abort-on-container-exit
